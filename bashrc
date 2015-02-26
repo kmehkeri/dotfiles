@@ -6,6 +6,9 @@ if [[ $- != *i* ]] ; then
 	return
 fi
 
+# Home
+XHOME=${1:-$HOME}
+
 # Variables
 export EDITOR=vim
 export NLS_LANG=AMERICAN_POLAND.UTF8
@@ -25,9 +28,9 @@ alias cronedit='crontab -e'
 alias be='bundle exec'
 
 # Ruby & RVM
-PATH=$PATH:$HOME/bin:$HOME/.rvm/bin
+PATH=$PATH:$XHOME/bin:$XHOME/.rvm/bin
 unset RUBYOPT
 
 # Local settings
-[[ -r "$HOME/.bashrc_local" ]] && source "$HOME/.bashrc_local"
+[[ -r "$XHOME/.bashrc.local" ]] && source "$XHOME/.bashrc.local"
 

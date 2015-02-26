@@ -37,3 +37,7 @@ set nobackup
 set nowb
 set noswapfile
 
+" Local settings
+if filereadable(glob("$HOME/.vimrc.local")) 
+	source $HOME/.vimrc.local
+endif
