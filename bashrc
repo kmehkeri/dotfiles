@@ -14,6 +14,7 @@ export EDITOR=vim
 export NLS_LANG=AMERICAN_POLAND.UTF8
 
 # Aliases
+alias _='sudo'
 alias l='ls'
 alias sl='ls'
 alias myps='ps -fu `id -un`'
@@ -22,6 +23,7 @@ alias ..="cd .."
 alias cd..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias -- --='cd -'
 alias x='exit'
 alias cronlist='crontab -l'
 alias cronedit='crontab -e'
