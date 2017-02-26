@@ -37,6 +37,9 @@ set nobackup
 set nowb
 set noswapfile
 
+" Special filetype settings
+autocmd FileType scala setlocal shiftwidth=2 tabstop=2 expandtab
+
 " Local settings
 if filereadable(glob("$HOME/.vimrc.local")) 
 	source $HOME/.vimrc.local
