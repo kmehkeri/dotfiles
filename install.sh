@@ -1,31 +1,38 @@
-cd "${BASH_SOURCE%/*}"
-SOURCE_DIR=$(pwd)
-INSTALL_DIR=${1:-$HOME}
+#!/bin/bash
 
-echo "Installing dotfiles from $SOURCE_DIR to $INSTALL_DIR"
-
-echo "* Backing up existing dotfiles"
-for dotfile in bashrc bash_profile vimrc; do
-	if [[ -e "${INSTALL_DIR}/.${dotfile}" || -L "${INSTALL_DIR}/.${dotfile}" ]]; then
-		echo "  - mv ${INSTALL_DIR}/.${dotfile} ${INSTALL_DIR}/.${dotfile}.old"
-		mv ${INSTALL_DIR}/.${dotfile} ${INSTALL_DIR}/.${dotfile}.old
-		if [[ $? != 0 ]]; then
-			echo "Error, aborting"
-			exit 1
-		fi
-	fi
-done
-echo "  (Remove later backups using 'rm ${INSTALL_DIR}/{.bashrc.old,.bash_profile.old,.vimrc.old}')"
-
-echo "* Installing new dotfiles"
-for dotfile in bashrc bash_profile vimrc; do
-	echo "  - ${INSTALL_DIR}/.${dotfile} -> ${SOURCE_DIR}/${dotfile}"
-	ln -s ${SOURCE_DIR}/${dotfile} ${INSTALL_DIR}/.${dotfile}
-	if [[ $? != 0 ]]; then
-		echo "Error, aborting"
+# Installation dir
+if [[ ! -z $1 ]]; then
+	if [[ -d $1 ]]; then
+		DIR=$1
+	else
+		echo "$1 is not a directory!"
 		exit 1
 	fi
-done
+else
+	DIR=$(dirname $(readlink -f $0))
+	if [[ $DIR = $HOME* ]]; then DIR=~${DIR#$HOME}; fi
+fi
 
-echo Done
+echo "Sourcing dotfiles from $DIR"
+
+# Do the install
+if ! grep -q 'source.*/bashrc$' ~/.bashrc; then
+	sed -i "1i# Source dotfiles\nsource $DIR/bashrc\n" ~/.bashrc
+	echo "Installed in .bashrc"
+fi
+
+if ! grep -q 'source.*/bash_profile$' ~/.bash_profile; then
+	sed -i "1i# Source dotfiles\nsource $DIR/bash_profile\n" ~/.bash_profile
+	echo "Installed in .bash_profile"
+fi
+
+if ! grep -q 'source.*/vimrc$' ~/.vimrc; then
+	sed -i "1i\" Source dotfiles\nsource $DIR/vimrc\n" ~/.vimrc
+	echo "Installed in .vimrc"
+fi
+
+if ! grep -q 'path=.*/gitconfig$' ~/.gitconfig; then
+	sed -i "1i# Source dotfiles\n[include]\npath=$DIR/gitconfig\n" ~/.gitconfig
+	echo "Installed in .gitconfig"
+fi
 
