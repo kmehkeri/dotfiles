@@ -39,6 +39,7 @@ set noswapfile
 
 " Special filetype settings
 autocmd FileType scala setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 expandtab
 
 " Local settings
 if filereadable(glob("$HOME/.vimrc.local")) 
