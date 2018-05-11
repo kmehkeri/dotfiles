@@ -13,6 +13,13 @@ XHOME=${1:-$HOME}
 export EDITOR=vim
 export NLS_LANG=AMERICAN_POLAND.UTF8
 
+# Functions
+function dv {
+	delim=${1:-';'}
+	shift
+	perl -pe 's/((?<='"${delim}"')|(?<=^))'"${delim}"'/ '"${delim}"'/g;' "$@" | column -t -s"$delim"
+}
+
 # Aliases
 alias _='sudo'
 alias l='ls'
