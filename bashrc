@@ -6,9 +6,6 @@ if [[ $- != *i* ]] ; then
 	return
 fi
 
-# Home
-XHOME=${1:-$HOME}
-
 # Variables
 export EDITOR=vim
 export NLS_LANG=AMERICAN_POLAND.UTF8
@@ -24,6 +21,7 @@ function dv {
 alias _='sudo'
 alias l='ls'
 alias sl='ls'
+alias lt='ls -ltr | tail'
 alias myps='ps -fu `id -un`'
 alias e="env | sort"
 alias ..="cd .."
@@ -39,9 +37,10 @@ alias hrr='hr "#" "#" "#"'
 alias hrrr='hr "#" "#" "#" "#" "#" "#" "#" "#" "#"'
 
 # Ruby & RVM
-PATH=$PATH:$XHOME/bin:$XHOME/.rvm/bin
+PATH=$PATH:$HOME/bin:$HOME/.rvm/bin
 unset RUBYOPT
 
+# Prompt
 prompt_command() {
 	STATUS=$?
 
@@ -70,6 +69,5 @@ prompt_command() {
 
 PROMPT_COMMAND=prompt_command
 
-# Local settings
-[[ -r "$XHOME/.bashrc.local" ]] && source "$XHOME/.bashrc.local"
-
+# Other
+shopt -s histappend
