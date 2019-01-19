@@ -16,23 +16,27 @@ fi
 echo "Sourcing dotfiles from $DIR"
 
 # Do the install
+[[ -e ~/.bashrc ]] || touch ~/.bashrc
 if ! grep -q 'source.*/bashrc$' ~/.bashrc; then
-	sed -i "1i# Source dotfiles\nsource $DIR/bashrc\n" ~/.bashrc
+	echo -e "#Source dotfiles\nsource $DIR/bashrc\n" | cat - ~/.bashrc >_tmp && mv _tmp ~/.bashrc
 	echo "Installed in .bashrc"
 fi
 
+[[ -e ~/.bash_profile ]] || touch ~/.bash_profile
 if ! grep -q 'source.*/bash_profile$' ~/.bash_profile; then
-	sed -i "1i# Source dotfiles\nsource $DIR/bash_profile\n" ~/.bash_profile
+	echo -e "# Source dotfiles\nsource $DIR/bash_profile\n" | cat - ~/.bash_profile >_tmp && mv _tmp ~/.bash_profile
 	echo "Installed in .bash_profile"
 fi
 
+[[ -e ~/.vimrc ]] || touch ~/.vimrc
 if ! grep -q 'source.*/vimrc$' ~/.vimrc; then
-	sed -i "1i\" Source dotfiles\nsource $DIR/vimrc\n" ~/.vimrc
+	echo -e "\" Source dotfiles\nsource $DIR/vimrc\n" | cat - ~/.vimrc >_tmp && mv _tmp ~/.vimrc
 	echo "Installed in .vimrc"
 fi
 
+[[ -e ~/.gitconfig ]] || touch ~/.gitconfig
 if ! grep -q 'path=.*/gitconfig$' ~/.gitconfig; then
-	sed -i "1i# Source dotfiles\n[include]\npath=$DIR/gitconfig\n" ~/.gitconfig
+	echo -e "# Source dotfiles\n[include]\npath=$DIR/gitconfig\n" | cat - ~/.gitconfig >_tmp && mv _tmp ~/.gitconfig
 	echo "Installed in .gitconfig"
 fi
 
