@@ -71,3 +71,4 @@ PROMPT_COMMAND=prompt_command
 
 # Other
 shopt -s histappend
+shopt -s nullglob
