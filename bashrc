@@ -35,6 +35,7 @@ alias cronedit='crontab -e'
 alias be='bundle exec'
 alias hrr='hr "#" "#" "#"'
 alias hrrr='hr "#" "#" "#" "#" "#" "#" "#" "#" "#"'
+alias sum='paste -sd+ | bc'
 
 # Ruby & RVM
 PATH=$PATH:$HOME/bin:$HOME/.rvm/bin
