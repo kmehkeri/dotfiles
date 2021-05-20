@@ -70,5 +70,10 @@ prompt_command() {
 
 PROMPT_COMMAND=prompt_command
 
+# History
+export HISTCONTROL=erasedups
+export HISTSIZE=10000
+shopt -s histappend
+
 # Other
 shopt -s histappend
