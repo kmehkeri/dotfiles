@@ -1,7 +1,15 @@
 [core]
     autocrlf = false
+[fetch]
+    prune = true
+    prunetags = true
 [pull]
     ff = only
+[push]
+    default = current
+    followtags = true
+[log]
+    date = iso
 [alias]
     l = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(yellow)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
     la = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(yellow)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
