@@ -61,11 +61,12 @@ prompt_command() {
 	W='\[\e[1;37m\]'
 	NC='\[\e[0m\]'
 	
-	PS1="$c[\A]"                                 # Time
-	PS1+=" $G\u@\h"                              # User, host
-	PS1+=" $B\w"                                 # Dir
-	[[ ${STATUS} == 0 ]] || PS1+=" $p($STATUS)"  # Exit code, if present
-	PS1+=" $B\$ $NC"                             # Sign
+	PS1="$c[\A]"                                   # Time
+	PS1+=" $G\u@\h"                                # User, host
+        [[ -z "${PROJECT}" ]] || PS1+=" $W[$PROJECT]"  # Project environment, if present
+        PS1+=" $B\w"                                   # Dir
+	[[ ${STATUS} == 0 ]] || PS1+=" $p($STATUS)"    # Exit code, if present
+	PS1+=" $B\$ $NC"                               # Sign
 }
 
 PROMPT_COMMAND=prompt_command
