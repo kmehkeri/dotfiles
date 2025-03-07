@@ -1,0 +1,7 @@
+.lpl*
+_lpl*
+.vscode*
+*~
+.DS_Store
+.venv
+__pycache__
